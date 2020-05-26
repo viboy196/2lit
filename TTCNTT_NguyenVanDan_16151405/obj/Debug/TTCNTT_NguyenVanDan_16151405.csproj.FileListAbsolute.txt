@@ -1,0 +1,10 @@
+D:\anhdan\STUDY\k8\thực tập công nghệ thông tin\TTCNTT_NguyenVanDan_16151405\TTCNTT_NguyenVanDan_16151405\bin\Debug\TTCNTT_NguyenVanDan_16151405.exe.config
+D:\anhdan\STUDY\k8\thực tập công nghệ thông tin\TTCNTT_NguyenVanDan_16151405\TTCNTT_NguyenVanDan_16151405\bin\Debug\TTCNTT_NguyenVanDan_16151405.exe
+D:\anhdan\STUDY\k8\thực tập công nghệ thông tin\TTCNTT_NguyenVanDan_16151405\TTCNTT_NguyenVanDan_16151405\bin\Debug\TTCNTT_NguyenVanDan_16151405.pdb
+D:\anhdan\STUDY\k8\thực tập công nghệ thông tin\TTCNTT_NguyenVanDan_16151405\TTCNTT_NguyenVanDan_16151405\obj\Debug\TTCNTT_NguyenVanDan_16151405.csprojAssemblyReference.cache
+D:\anhdan\STUDY\k8\thực tập công nghệ thông tin\TTCNTT_NguyenVanDan_16151405\TTCNTT_NguyenVanDan_16151405\obj\Debug\TTCNTT_NguyenVanDan_16151405.Form1.resources
+D:\anhdan\STUDY\k8\thực tập công nghệ thông tin\TTCNTT_NguyenVanDan_16151405\TTCNTT_NguyenVanDan_16151405\obj\Debug\TTCNTT_NguyenVanDan_16151405.Properties.Resources.resources
+D:\anhdan\STUDY\k8\thực tập công nghệ thông tin\TTCNTT_NguyenVanDan_16151405\TTCNTT_NguyenVanDan_16151405\obj\Debug\TTCNTT_NguyenVanDan_16151405.csproj.GenerateResource.cache
+D:\anhdan\STUDY\k8\thực tập công nghệ thông tin\TTCNTT_NguyenVanDan_16151405\TTCNTT_NguyenVanDan_16151405\obj\Debug\TTCNTT_NguyenVanDan_16151405.csproj.CoreCompileInputs.cache
+D:\anhdan\STUDY\k8\thực tập công nghệ thông tin\TTCNTT_NguyenVanDan_16151405\TTCNTT_NguyenVanDan_16151405\obj\Debug\TTCNTT_NguyenVanDan_16151405.exe
+D:\anhdan\STUDY\k8\thực tập công nghệ thông tin\TTCNTT_NguyenVanDan_16151405\TTCNTT_NguyenVanDan_16151405\obj\Debug\TTCNTT_NguyenVanDan_16151405.pdb
