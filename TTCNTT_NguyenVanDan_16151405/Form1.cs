@@ -14,56 +14,25 @@ namespace TTCNTT_NguyenVanDan_16151405
     {
         public Form1()
         {
-          
+            check = 1;
             InitializeComponent();
         }
-
+        bool checkrd;
          Map map = new Map();
         int[] ovitri = new int[20];
-        
-        public struct canh
-        {
-            public canh(Pointsss pointsssNode1, Pointsss pointsssNode2) : this()
-            {
-                this.diem1 = pointsssNode1;
-                this.diem2 = pointsssNode2;
-            }
-
-            public Pointsss diem1 { get; set; }
-            public Pointsss diem2 { get; set; }
-        }
-        List<canh> lstcanh = new List<canh>();
+        int check;
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
-        private bool checkcatnhau(Pointsss p1 , Pointsss p2 , Pointsss p3 , Pointsss p4)
-        {
-            float a = (float)(p1.Y - p2.Y) /(float) (p1.X - p2.X);
-            float b = (float)p1.Y - a * (float)p1.X;
-            var hs34 = (p3.Y - a * p3.X + b) * (p4.Y - a * p4.X + b);
-
-            float a34 = (float)(p3.Y - p4.Y) / (float)(p3.X - p4.X);
-            float b34 = (float)p3.Y - a * (float)p3.X;
-            var hs12 = (p1.Y - a34 * p1.X + b34) * (p2.Y - a34 * p2.X + b34);
-            if (hs34 < -0.0001 && hs12 < -0.0001) return false;
-            return true;
-
-        }
-        private bool checkcatlistcanh(Pointsss P1 , Pointsss P2)
-        {
-            if (lstcanh.Count == 0) return true;
-            foreach( var i in lstcanh)
-            {
-                if (checkcatnhau(P1, P2, i.diem1, i.diem2) == false) return false;
-            }
-            return true;
-        }
         private void random_Click(object sender, EventArgs e)
         {
-            lstcanh = new List<canh>();
+            checkrd = true;
+           
             var sodiem = (int)Numnode.Value;
             var socanh = (int)NumEdge.Value;
+            NumEdge.Maximum = Numnode.Value * (Numnode.Value - 1);
+            if (NumEdge.Value > NumEdge.Maximum) NumEdge.Value = NumEdge.Maximum;
             var camdem = (int)Math.Sqrt(sodiem);
             Dictionary<int, List<Node>> dictnode = new Dictionary<int, List<Node>>();
             if (socanh > sodiem * (sodiem - 1))
@@ -99,10 +68,8 @@ namespace TTCNTT_NguyenVanDan_16151405
                 if(i != j)
                 {
                     
-                    if (!map.lstNode[i].Connecttions.Contains(map.lstNode[j]) && checkcatlistcanh(map.lstNode[i].PointsssNode , map.lstNode[j].PointsssNode) && map.lstNode[i].Connecttions.Count +map.lstNode[i].LastConnecttions.Count < 5) {
+                    if (!map.lstNode[i].Connecttions.Contains(map.lstNode[j]) ) {
                         map.lstNode[i].Connecttions.Add(map.lstNode[j]);
-                        map.lstNode[j].LastConnecttions.Add(map.lstNode[i]);
-                        lstcanh.Add(new canh(map.lstNode[i].PointsssNode , map.lstNode[i].PointsssNode));
                         socanh--;
                     }
                    
@@ -111,8 +78,7 @@ namespace TTCNTT_NguyenVanDan_16151405
             draw();
             
         }
-        int tt;
-        
+        int tt;     
         void draw()
         {
             Bitmap bmp = new Bitmap(this.pictureBox1.Width, this.pictureBox1.Height);
@@ -150,6 +116,8 @@ namespace TTCNTT_NguyenVanDan_16151405
 
                     }
                 }
+                if(i.Visited == true) g.FillEllipse(Brushes.Gray, new Rectangle((int)i.PointsssNode.X - 10, (int)i.PointsssNode.Y - 10, 2 * 10, 2 * 10));
+
                 if (i == map.StartNode)
                     g.FillEllipse(Brushes.Yellow, new Rectangle((int)i.PointsssNode.X - 10, (int)i.PointsssNode.Y - 10, 2 * 10, 2 * 10));
                 if (i == map.EndNode)
@@ -195,9 +163,10 @@ namespace TTCNTT_NguyenVanDan_16151405
             g.Dispose();
 
         }
-
+        // dijktra
         private void button1_Click(object sender, EventArgs e)
         {
+            if (!checkrd) random_Click(sender, e);
             for(int i = 0; i < map.lstNode.Count; i++)
             {
                 map.lstNode[i].Visited = false;
@@ -213,16 +182,7 @@ namespace TTCNTT_NguyenVanDan_16151405
             
 
         }
-
-
-
-
-
-        private void NumEdge_ValueChanged(object sender, EventArgs e)
-        {
-            NumEdge.Maximum = Numnode.Value * (Numnode.Value - 1);
-        }
-
+        
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (tt != 1) return;
@@ -278,10 +238,75 @@ namespace TTCNTT_NguyenVanDan_16151405
                 }
             });
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             tt = 1;
+        }
+        // astar
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (!checkrd) random_Click(sender, e);
+
+            for (int i = 0; i < map.lstNode.Count; i++)
+            {
+                map.lstNode[i].Visited = false;
+                map.lstNode[i].MinStartToNode = null;
+                map.lstNode[i].NearestToStart = null;
+            }
+
+            map.StartNode = map.lstNode[(int)StartNode.Value - 1];
+            map.EndNode = map.lstNode[(int)EndNode.Value - 1];
+
+            SearchEngine.GetShortPathAstar(map);
+            draw();
+
+
+        }
+        private void pictureBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if( tt == 1)
+            {
+                map.lstNode.ForEach(it =>
+               {
+                   it.PointsssNode.isclick = false;
+               });
+                draw();
+                tt = 0;
+            }
+            int x = (e as MouseEventArgs).X;
+            int y = (e as MouseEventArgs).Y;
+            var P = new Pointsss();
+            P.X = x;
+            P.Y = y;
+            if (check == 1)
+            {
+                map.lstNode.ForEach(it =>
+               {
+                   if (Pointsss.Distance(it.PointsssNode, P) < 3)
+                   {
+                       map.StartNode = it;
+                       StartNode.Value = it.PointsssNode.Id+1;
+                       draw();
+                       check *= -1;
+                       return;
+                   }
+               });
+            }
+            else
+            {
+                map.lstNode.ForEach(it =>
+                {
+                    if (Pointsss.Distance(it.PointsssNode, P) < 3)
+                    {
+                        map.EndNode = it;
+                        EndNode.Value = it.PointsssNode.Id + 1;
+                        draw();
+                        check *= -1;
+                        return;
+                    }
+                });
+            }           
+
         }
     }
 }

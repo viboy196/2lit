@@ -38,6 +38,9 @@ namespace TTCNTT_NguyenVanDan_16151405
         // độ dài ngắn nhất từ Start to node
         public double? MinStartToNode { get; set; }
 
+        // khoảng cách tới end
+        public double? NodetoEnd { get; set; }
+
         // check coi điểm đã đươc duyệt chưa ?
         public bool Visited { get; set; }
         // điểm kết nối trước với node này và thuộc nhánh ngắn nhất
